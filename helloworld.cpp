@@ -129,6 +129,8 @@ ll fast(ll a, ll b, ll mod) {
 using namespace std;
 
 int main(){
-    cout << "hello world!" << endl;
+    VLL vll;
+    vll.PB(99999);
+    cout << to_string(vll[0]) << endl;
     return 0;
 }

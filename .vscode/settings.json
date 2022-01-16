@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "utility": "cpp",
-        "cstdio": "cpp"
+        "cstdio": "cpp",
+        "deque": "cpp"
     }
 }
