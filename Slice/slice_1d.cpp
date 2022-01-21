@@ -23,3 +23,22 @@ vector<int> MERG(vector<int>& A,vector<int>& B){
     merge(A.begin(), A.end(),B.begin(), B.end(), AB.begin());
     return AB;
 }
+
+//切片:从i到最后
+vector<int> SLICE(vector<int>& A,int i){
+    return vector<int>(A.begin() + i, A.end());
+}
+
+//切片:从i到j（不含j）或末尾
+vector<int> SLICE(vector<int>& A,int i,int j){
+    return vector<int>(A.begin() + i, A.begin() + min(j - 1,int(A.size())));
+}
+
+//切片:从i到j（不含j）间隔k
+vector<int> SLICE(vector<int>& A,int i,int j,int k){
+    vector<int>B;
+    for(int a=i;a<j;a+=k){
+        B.push_back(A[a]);
+    }
+    return B;
+}
