@@ -6,37 +6,52 @@
 #include<vector>
 #include<unordered_map>
 #include<utility>
+#include<queue>
+#include<algorithm>
 
 using namespace std;
 
 int main(){
-    int n,m,c;
-    int i,j;
-    int x1,y1,x2,y2;
-    unordered_map<int,vector<pair<int,int>>> M;
-    cin>>n>>m;
-    for (int i = 0; i < n; i++)
-    {
+    int t,n,m,k,x,w,sm,i,j;
+    string sp;
+    cin>>t;
+    while(t--){
+        priority_queue<tuple<int,int,int>> evt;
         vector<pair<int,int>> vc;
-        for (int j = 0; j < m; j++){
-            cin >> c;
-            if(!M.count(c)){
-                M[c] = vector<pair<int,int>>();
-            }
-            M[c].push_back(make_pair(i,j));
-        }
-    }
-    long long ans = 0;
-    for(auto c:M){
-        int len = c.second.size();
-        for(int i=0;i<len-1;i++){
-            tie(x1,y1) = c.second[i];
-            for(int j=i+1;j<len;j++){
-                tie(x2,y2) = c.second[j];
-                ans += abs(x1-x2) + abs(y1-y2);
+        cin>>n>>m;
+        //cout<<"n:"<<n<<";m:"<<m<<endl;
+        n*=2;
+        k=0;
+        sm = 0;
+        for(int i=0;i<m;i++){
+            cin>>x>>w;
+            evt.push(make_tuple(w,x,i+1));
+            sm+=w;
+            k++;
+            if(k>n){
+                tie(w,x,j) = evt.top();
+                sm-=w;
+                evt.pop();
             }
         }
+        cout<<sm<<endl;
+        while(!evt.empty()){
+            tie(w,x,j) = evt.top();
+            evt.pop();
+            vc.push_back(make_pair(x,j));
+        }
+        sort(vc.begin(),vc.end());
+        i=0;
+        j=n-1;
+        while(i<j){
+            int pi,pj;
+            tie(x,pi) = vc[i];
+            tie(x,pj) = vc[j];
+            cout<<pi<<" "<<pj<<endl;
+            i++;
+            j--;
+        }
+        cout<<endl;
     }
-    cout << ans << endl;
     return 0;
 }
